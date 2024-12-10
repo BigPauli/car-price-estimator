@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Car Price Estimator</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+</head>
+<body>
+    <div class="container">
+        <h4 class="top-info">Fill out information about your car and hit the button at the bottom to get an estimation of your car's value*.</h4>
+    </div>
+    <form method="POST">
+        <!-- Manufacturer and Category -->
+        <div class="container">
+            <h5 class="header">Manufacturer and Category</h5>
+            <label for="user_manufacturer">Manufacturer:</label>
+            <select name="user_manufacturer" id="user_manufacturer">
+                <option value="hyundai">Hyundai</option>
+                <option value="toyota">Toyota</option>
+                <option value="mercedes-benz">Mercedes-Benz</option>
+                <option value="chevrolet">Chevrolet</option>
+                <option value="ford">Ford</option>
+                <option value="bmw">BMW</option>
+                <option value="honda">Honda</option>
+                <option value="lexus">Lexus</option>
+                <option value="nissan">Nissan</option>
+                <option value="volkswagen">Volkswagen</option>
+                <option value="ssangyong">Ssangyong</option>
+                <option value="kia">Kia</option>
+                <option value="opel">Opel</option>
+                <option value="mitsubishi">Mitsubishi</option>
+                <option value="subaru">Subaru</option>
+                <option value="audi">Audi</option>
+                <option value="mazda">Mazda</option>
+                <option value="jeep">Jeep</option>
+                <option value="daewoo">Daewoo</option>
+                <option value="dodge">Dodge</option>
+                <option value="suzuki">Suzuki</option>
+                <option value="fiat">Fiat</option>
+                <option value="porsche">Porsche</option>
+                <option value="land-rover">Land Rover</option>
+                <option value="vaz">VAZ</option>
+                <option value="other">Other</option>
+            </select>
+        
+            <label for="user_category">Category:</label>
+            <select name="user_category" id="user_category">
+                <option value="sedan">Sedan</option>
+                <option value="jeep">Jeep</option>
+                <option value="hatchback">Hatchback</option>
+                <option value="minivan">Minivan</option>
+                <option value="coupe">Coupe</option>
+                <option value="universal">Universal</option>
+                <option value="microbus">Microbus</option>
+                <option value="goods-wagon">Goods Wagon</option>
+                <option value="pickup">Pickup</option>
+                <option value="cabriolet">Cabriolet</option>
+                <option value="limousine">Limousine</option>
+            </select>
+        </div>
+    
+        <!-- Production Year and Engine Information -->
+        <div class="container">
+            <h5 class="header">Production Year and Engine Information</h5>
+            <label for="user_production_year">Production Year:</label>
+            <input type="number" name="user_production_year" id="user_production_year" value="2020" min="1940" max="2030">
+        
+            <label for="user_engine_volume">Engine Volume (L):</label>
+            <input type="number" name="user_engine_volume" id="user_engine_volume" value="0" step="0.1" min="0">
+        
+            <label for="user_cylinders">Cylinders:</label>
+            <input type="number" name="user_cylinders" id="user_cylinders" value="2" min="1">
+        </div>
+
+        <div class="container">
+            <!-- Fuel and Transmission -->
+            <h5 class="header">Fuel and Transmission</h5>
+            <label for="user_fuel_type">Fuel Type:</label>
+            <select name="user_fuel_type" id="user_fuel_type">
+                <option value="petrol">Petrol</option>
+                <option value="diesel">Diesel</option>
+                <option value="hybrid">Hybrid</option>
+                <option value="lpg">LPG</option>
+                <option value="cng">CNG</option>
+            </select>
+        
+            <label for="user_gear_box_type">Gearbox Type:</label>
+            <select name="user_gear_box_type" id="user_gear_box_type">
+                <option value="automatic">Automatic</option>
+                <option value="tiptronic">Tiptronic</option>
+                <option value="manual">Manual</option>
+                <option value="variator">Variator</option>
+                <option value="unknown">I Don't Know</option>
+            </select>
+        
+            <label for="user_drive_wheels">Drive Wheels:</label>
+            <select name="user_drive_wheels" id="user_drive_wheels">
+                <option value="front">Front</option>
+                <option value="4x4">4x4</option>
+                <option value="rear">Rear</option>
+                <option value="unknown">I Don't Know</option>
+            </select>
+        </div>
+    
+        <!-- Appearance and Features -->
+        <div class="container">
+            <h5 class="header">Appearance and Features</h5>
+            <label for="user_color">Color:</label>
+            <select name="user_color" id="user_color">
+                <option value="black">Black</option>
+                <option value="white">White</option>
+                <option value="silver">Silver</option>
+                <option value="grey">Grey</option>
+                <option value="blue">Blue</option>
+                <option value="other">Other</option>
+            </select>
+        
+            <label for="user_leather_interior">Leather Interior:</label>
+            <input type="checkbox" name="user_leather_interior" id="user_leather_interior">
+        
+            <label for="user_turbo">Turbo Engine:</label>
+            <input type="checkbox" name="user_turbo" id="user_turbo">
+        </div>
+    
+        <!-- Safety and Mileage -->
+        <div class="container">
+            <h5 class="header">Safety and Mileage</h5>
+            <label for="user_mileage">Mileage (mi):</label>
+            <input type="number" name="user_mileage" id="user_mileage" value="50000" min="0">
+        
+            <label for="user_airbags">Number of Airbags:</label>
+            <input type="number" name="user_airbags" id="user_airbags" value="2" min="0">
+        </div>
+        <div class="container">
+            <!-- Levy -->
+            <h5 class="header">Tax Information</h5>
+            <label for="user_levy">Levy (Tax):</label>
+            <input type="number" name="user_levy" id="user_levy" value="0" min="0">
+        </div>
+
+        <!-- Submit Buttons -->
+        <div class="container">
+            <h5 class="header">How much is my car worth?</h5>
+            <button type="submit" name="submit_button" class="btn btn-primary submit-button" value="smart">Smart Model</button>
+            <button type="submit" name="submit_button" class="btn btn-primary submit-button" value="dumb">Dumb Model</button>
+        </div>
+        
+        <!-- Output -->
+         {% if predicted_price != "" %} 
+        <div class="container">
+            <h3 class="car-price">Your car is worth ${{ predicted_price }}</h3>
+            <table class="table table-striped">
+                <tbody>
+                    {% for key, val in car_data.items() %}
+                    <tr>
+                        <td>{{ key }}</td>
+                        <td>{{ val }}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+
+        {% endif %}
+
+        <div class="container">
+            <p class="disclaimer">*This project is a test of machine learning based on historical data from <a href="https://www.kaggle.com/datasets/deepcontractor/car-price-prediction-challenge/data">kaggle</a> and will likely not be accurate.</p>
+        </div>
+    </form>
+
+    
+    
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.min.js" integrity="sha384-0pUGZvbkm6XF6gxjEnlmuGrJXVbNuzT9qBBavbLwCsOGabYfZo0T0to5eqruptLy" crossorigin="anonymous"></script>
+</body>
+</html>
