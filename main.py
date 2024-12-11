@@ -1,6 +1,4 @@
-from PyQt6 import QtCore, QtGui, QtWidgets
-# imports from ui classes
-import sys
-from pathlib import Path
+from python.flask.app import app
 
-pass
+if __name__ == "__main__":
+    app.run()
