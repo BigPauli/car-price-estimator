@@ -1,8 +1,17 @@
 from flask import Flask, render_template, request
-import pandas as pd
 import numpy as np
 import tensorflow as tf
 from joblib import load
+import os
+
+# get directory of current file and related files
+# https://docs.python.org/3/library/os.path.html
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+
+# other paths relative to BASE_DIR
+MODEL_PATH = os.path.join(BASE_DIR, "../models/smart_model.keras")
+X_SCALER_PATH = os.path.join(BASE_DIR, "../../data/X_scaler.bin")
+Y_SCALER_PATH = os.path.join(BASE_DIR, "../../data/y_scaler.bin")
 
 # create app
 app = Flask(__name__)
@@ -39,8 +48,12 @@ def index():
 
     data = request.form
     if data:
+        print(data)
+
         # making the data dictonary to be shown to the user more readable
+        print(data["user_turbo"])
         display_data = {key[5].upper() + " ".join(key.split("_")[1:])[1:]: val for key, val in data.items()}
+        print(display_data)
         
         # remove accidental argument that was added
         if "Tutton" in display_data:
@@ -106,14 +119,9 @@ def index():
         car_data = np.array(car_data).reshape(1, -1)
 
         # load the smart model and scalers
-        nn = tf.keras.models.load_model("../models/smart_model.keras")
-        X_scaler = load("../../data/X_scaler.bin")
-        y_scaler = load("../../data/y_scaler.bin")
-
-
-        print("Number of features expected by scaler:", X_scaler.n_features_in_)
-        print("Mean shape:", X_scaler.mean_.shape)
-        print("Var shape:", X_scaler.var_.shape)
+        nn = tf.keras.models.load_model(MODEL_PATH)
+        X_scaler = load(X_SCALER_PATH)
+        y_scaler = load(Y_SCALER_PATH)
 
         # scale the data
         scaled_data = X_scaler.transform(car_data)
