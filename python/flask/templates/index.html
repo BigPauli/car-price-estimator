@@ -145,12 +145,12 @@
         <!-- Submit Buttons -->
         <div class="container">
             <h5 class="header">How much is my car worth?</h5>
-            <button type="submit" name="submit_button" class="btn btn-primary submit-button" value="smart">Smart Model</button>
+            <button type="submit" name="submit_button" class="btn btn-primary submit-button" value="smart">Submit</button>
             <button type="submit" name="submit_button" class="btn btn-primary submit-button" value="dumb" hidden>Dumb Model</button>
         </div>
         
         <!-- Output -->
-         {% if predicted_price != "" %} 
+        {% if predicted_price != "" %} 
         <div class="container">
             <h3 class="car-price">Your car is worth ${{ predicted_price }}</h3>
             <table class="table table-striped">
